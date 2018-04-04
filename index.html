@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <script src="js/knockout-3.4.2.js"></script>
+        <script src="js/knockout.mapping.js"></script>
+        <script src="js/main.js"></script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=[YOUR_API_KEY]&v=3&callback=initMap">
+        </script>
+    </head>
+    <body>
+        <div class="header-nav" id="topnav">
+            <span>街区地图项目</span>
+
+        </div>
+        <div id="container" data-bind="css: { container: true , 'aside-hidden': toggle_class }">
+            <div class="aside" id="sidebar">
+                <div class="aside-area">
+                    <div class="aside-area-main">
+                        <div class="aside-headline">
+                            <span>深圳市</span>
+                        </div>
+                        <div class="filter">
+                            <input placeholder="位置名称" class="search-words" data-bind="textInput: filter, event: {keydown: viewModel.keyGetLocations}">
+                            <button class="btn weak m search" data-bind="click: getLocations"></button>
+                        </div>
+                        <ul class="aside-list" data-bind="foreach: filterLocation">
+                            <li data-bind="event: { click: viewModel.clickLocationInfo }">
+                                <span class="aside-level-1 aside-select" data-bind="text: title"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="menu-fold" data-bind="event: { click: toggle_sidebar }"><i data-bind="attr: { title: toggle }"></i></div>
+            </div>
+            <div id="map"></div>
+        </div>
+    </body>
+</html>
